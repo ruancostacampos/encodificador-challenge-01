@@ -13,6 +13,7 @@ let uRegex = /ufat/g;
 let mouseX, mouseY;
 let mouseText;
 const ANIMATION_SPEED = 60;
+let animatingCursor = false;
 
 function sleep(speed){
     return new Promise(r => setTimeout(r, speed));
@@ -21,28 +22,30 @@ function sleep(speed){
 // Load the html element to te variables
 window.onload =  () => {
     
-    userInput = document.getElementById("userInput")
+    userInput = document.getElementById("userInput");
     userInput.addEventListener("input", e => {
-        userInput.style.height = "auto"
+        userInput.style.height = "auto";
         let scrollHeight = e.target.scrollHeight;
         userInput.style.height = `${scrollHeight}px`;
     })
 
-    userInput.addEventListener("input", validateInput)
-    emptyWarning = document.getElementsByClassName("encodedTextEmptyWarning")[0]
-    emptyImage = document.getElementsByClassName("man-magnifying")[0]
-    encodedText = document.getElementById("encodedText")
-    initiallyHidden = document.getElementsByClassName("initiallyHidden")[0]
-    copyButton = document.getElementById("copyButton")
-    mouseText = document.getElementById("mouseText")
-    copyButton.addEventListener("click", copyText)
-
+    userInput.addEventListener("input", validateInput);
+    emptyWarning = document.getElementsByClassName("encodedTextEmptyWarning")[0];
+    emptyImage = document.getElementsByClassName("man-magnifying")[0];
+    encodedText = document.getElementById("encodedText");
+    initiallyHidden = document.getElementsByClassName("initiallyHidden")[0];
+    copyButton = document.getElementById("copyButton");
+    mouseText = document.getElementById("mouseText");
+    copyButton.addEventListener("click", copyText);
     
 }
 
 
 async function animateCursor(e){
+ 
+    if(animatingCursor) return;
 
+    animatingCursor = true;
 
     function moveText(moveEvent){
         mouseText.style.left = `${moveEvent.clientX + 10}px`;
@@ -59,20 +62,22 @@ async function animateCursor(e){
 
     let text = 'Copiado'
     for(let i = 0; text[i] !== undefined; i++){
-        mouseText.innerText += text[i]
+        mouseText.innerText += text[i];
         await sleep(ANIMATION_SPEED);
     }
 
     await sleep(1000)
     
     while(mouseText.innerText[0] !== undefined){
-        mouseText.innerText = mouseText.innerHTML.substring(0, mouseText.innerText.length - 1)
+        mouseText.innerText = mouseText.innerHTML.substring(0, mouseText.innerText.length - 1);
         await sleep(ANIMATION_SPEED);
     }
 
     window.removeEventListener("mousemove",  moveText);
     mouseText.style.left = "-20px";
     mouseText.style.top = "-20px";
+
+    animatingCursor = false;
 }
 
 
@@ -88,21 +93,21 @@ function crypt(word){
         switch(char){
 
             case "a": 
-                encrypted = encrypted + 'ai'
+                encrypted = encrypted + 'ai';
                 break;
             case "e": 
-                encrypted = encrypted + 'enter'
+                encrypted = encrypted + 'enter';
                 break;
             case "i": 
-                encrypted = encrypted + 'imes'
+                encrypted = encrypted + 'imes';
                 break;
             case "o": 
-                encrypted = encrypted + 'ober'
+                encrypted = encrypted + 'ober';
                 break;
             case "u": 
-                encrypted = encrypted + 'ufat'
+                encrypted = encrypted + 'ufat';
                 break;
-            default: encrypted = encrypted + char
+            default: encrypted = encrypted + char;
         }
     }
 
@@ -112,7 +117,7 @@ function crypt(word){
 
 async function copyText(e){
     animateCursor(e)
-    await navigator.clipboard.writeText(encodedText.innerText)
+    await navigator.clipboard.writeText(encodedText.innerText);
 }
 
 function decrypt(word){
@@ -131,12 +136,12 @@ function runDecrypt(){
     // if the user put a value in the input
     if(userInput.value.length > 0){
         hideEmptyWarning()
-        encodedText.innerText = decrypt(userInput.value)
+        encodedText.innerText = decrypt(userInput.value);
     }
 
     // if the user press decrypt without put any value on the box
     if(userInput.value.length === 0){
-        showEmptyWarning()
+        showEmptyWarning();
     }
 
 }
@@ -146,13 +151,13 @@ function runCrypt(){
 
     // if the user put a value in the input
     if(userInput.value.length > 0){
-        hideEmptyWarning()
-        encodedText.innerText = crypt(userInput.value)
+        hideEmptyWarning();
+        encodedText.innerText = crypt(userInput.value);
     }
 
     // if the user press decrypt without put any value on the box
     if(userInput.value.length === 0){
-        showEmptyWarning()
+        showEmptyWarning();
     }
 }
 
@@ -160,21 +165,21 @@ function hideEmptyWarning(){
     emptyWarning.style.display = 'none';
     emptyImage.style.display = 'none';
     encodedText.style.display = 'block';
-    initiallyHidden.style.display = 'flex'
-    copyButton.style.display = 'block'
+    initiallyHidden.style.display = 'flex';
+    copyButton.style.display = 'block';
 }
 
 function showEmptyWarning(){
     emptyWarning.style.display = 'block';
-    emptyImage.removeAttribute("style")
+    emptyImage.removeAttribute("style");
     encodedText.style.display = 'none';
-    initiallyHidden.style.display = 'none'
-    copyButton.style.display = 'none'
+    initiallyHidden.style.display = 'none';
+    copyButton.style.display = 'none';
 }
 
 function validateInput(e){
     
-    e.target.value = e.target.value.toLowerCase()
-    e.target.value = e.target.value.replace(regex, '')
+    e.target.value = e.target.value.toLowerCase();
+    e.target.value = e.target.value.replace(regex, '');
 
 }
