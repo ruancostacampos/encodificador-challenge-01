@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --primary: #0A3871;
+    --hover-grey: #D8DFE8;
+    --background:  #F3F5FC;
+    --tablet-size: calc(100% - 64px);
+}
+
+html {
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+header { 
+    width: 80%;
+    flex-grow: 0;
+    flex-basis: auto;
+    padding-bottom: 60px;
+}
+
+#mouseText {
+    position: absolute;
+}
+
+/* CSS For Screens bigger than 000x000 */
+
+textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+    color: var(--primary);
+    resize: none;
+    width: 100%;
+    outline-style: none;
+    min-height: 30vh;
+}
+
+textarea::placeholder {
+    color: var(--primary);
+    opacity: 1;
+}
+
+
+button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary);
+    border: solid 1px var(--primary);
+    font-size: 16px;
+    padding: 24px 72px;
+    border-radius: 24px;
+    width: 40%;
+    transition: ease-in-out 0.2s;
+}
+
+.logo {
+    width: 31px;
+    height: 48px;
+    padding-top: 20px;
+}
+
+#btnEncrypt {
+    color: white;
+}
+
+#btnEncrypt:hover {
+    background-color: #20589c;
+}
+
+#btnDecrypt {
+    background-color: transparent;
+}
+
+#btnDecrypt:hover {
+    background-color: var(--hover-grey);
+}
+
+
+section {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding: 0 20px 0 20px;
+    width: 100%;
+    align-self: center;
+    max-width: 1920px;
+}
+
+.principalContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.detailContainer {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.detailBlock {
+    width: calc(80% + 24px);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 16px;
+}
+
+.encodedTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 30%;
+    background-color: white;
+    box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
+    border-radius: 32px;
+    max-width: 400px;
+    /* border: solid 1px red; */
+}
+
+.initiallyHidden {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: -webkit-fill-available;
+    padding: 32px;
+}
+
+.encodedTextEmptyWarning {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+}
+
+.man-magnifying {
+    height: auto;
+    width: 100%;
+}
+
+#strongText {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+footer {
+    flex-grow: 0;
+    flex-basis: 100px;
+}
+
+#encodedText {
+    line-break: anywhere;
+    width: 100%;
+    font-size: 24px;
+    display: none;
+}
+
+#copyButton {
+    width: 100%;
+    background-color: transparent;
+    display: none;
+}
+
+#copyButton:hover {
+    background-color: var(--hover-grey);
+}
+
+#copyButton:target {
+    background-color: aqua;
+}
+
+
+/* MEDIAQUERY FOR TABLET's */
+@media (max-width:970px) {
+    
+    header { 
+        width: var(--tablet-size);
+    }
+
+    section { 
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .principalContainer {
+        width: var(--tablet-size);
+    }
+
+    .man-magnifying {
+        display: none;
+    }
+
+    .detailContainer {
+        justify-content: center;
+    }
+
+    .buttonsContainer {
+        justify-content: center;
+    }
+
+    .encodedTextContainer{
+        margin-top: 64px;
+        width: var(--tablet-size);
+        max-width: none;
+    }
+
+    .encodedTextEmptyWarning {
+        align-items: center;
+    }
+
+    #strongText, #lightText {
+        padding: 8px;
+        margin: 0;
+    }
+
+}
+
+@media (max-width:480px) {
+
+    button {
+        width: 100%;
+    }
+
+    #userInput {
+        padding: 0px;
+    }
+
+    .buttonsContainer {
+        flex-direction: column;
+    }
+}

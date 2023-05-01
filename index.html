@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="script.js"></script>
+    <title>Encodificador - Challenge 01</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="./images/alura-logo.png" alt="Alura logo"/>
+    </header>
+    <section>
+        <div class="principalContainer">
+            <textarea id="userInput" placeholder="Digite seu texto"></textarea>
+            <div class="buttonsAndDetail">
+                <div class="detailContainer">
+                    <div class="detailBlock">
+                        <img src="./images/exclamation.svg" alt="Exclamation" />
+                        <span>Apenas letras minúsculas e sem acento.</span>
+                    </div>
+                </div>
+                <div class="buttonsContainer">
+                    <button id="btnEncrypt" onclick="runCrypt()">Criptografar</button>
+                    <button id="btnDecrypt" onclick="runDecrypt()">Descriptografar</button>
+                </div>
+            </div>
+        </div>
+        <div class="encodedTextContainer">
+            <div class="initiallyHidden">
+                <p id="encodedText">Test text</p>
+                <button id="copyButton">Copiar</button>
+            </div>
+            <img class="man-magnifying" src="./images/man-magnifying.svg" width="336px" alt="A man holding a magnifying glass">
+            <div class="encodedTextEmptyWarning">
+                <p id="strongText">Nenhuma mensagem encontrada.</p>
+                <p id="lightText">Digite um texto que você deseja criptografar ou descriptografar.</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <span id="mouseText"></span>
+</body>
+</html>
